@@ -2,13 +2,13 @@
 
 public class PhysicsDetector : MonoBehaviour
 {
-    // 1. Стандартна колізія (для Rigidbody)
+    // Фізичне зіткнення двох твердих об'єктів
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log($"[КОЛІЗІЯ Rigidbody] Об'єкт '{gameObject.name}' зіткнувся з '{collision.gameObject.name}'");
     }
 
-    // 2. Стандартний тригер (для Rigidbody / Collider)
+    // Зіткнення гравця (CharacterController) із перешкодами
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log($"[ТРИГЕР] Об'єкт '{gameObject.name}' перетнув зону '{other.gameObject.name}'");
@@ -18,7 +18,7 @@ public class PhysicsDetector : MonoBehaviour
     {
         string objectName = hit.gameObject.name.ToLower();
 
-        // Ігноруємо підлогу за назвою (якщо містить "floor", "plane" або "terrain")
+        // Ігноруємо підлогу та стіни за назвою
         if (objectName.Contains("floor") || objectName.Contains("wall") || objectName.Contains("terrain"))
         {
             return;
